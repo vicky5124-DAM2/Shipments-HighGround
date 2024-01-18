@@ -8,14 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public interface OfficeService {
+    List<Office> findAll();
 
-    List<Office> findAll(String fullName);
-
-    Office getByUsername(@NotBlank String username);
-
-    Office save(@NotNull @Valid Office user);
-
-    Office update(@NotNull @Valid Office user);
-
-    void deleteByUsername(@NotBlank String username);
+    Office getById(@NotBlank Long id);
 }

@@ -24,6 +24,10 @@ public class Shipment implements Serializable {
 
 	public static final int MAX_DESCRIPTION = 500;
 
+	public void addTracking(Action action) {
+		this.tracking.add(action);
+	}
+
 	public enum Category {
 		PARTICULAR, COMPANY, GOVERNMENT
 	}

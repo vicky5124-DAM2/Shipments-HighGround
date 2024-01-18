@@ -58,7 +58,6 @@ public class UserController {
 	@ApiResponse(responseCode = "200", content = { @Content(mediaType = "application/json", schema = @Schema(oneOf = {
 			Receptionist.class, LogisticsManager.class,	Courier.class }, discriminatorProperty = "role")) }, description = "User authenticated ok")
 	@ApiResponse(responseCode = "404", content = { @Content(mediaType = "application/json") }, description = "Resource not found")
-	/**/
 	@PostMapping("/authenticate")
 	public User authenticate(@RequestBody Map<String, String> usernamePassword) {
 		return userService.authenticate(usernamePassword.get("username"), usernamePassword.get("password"));

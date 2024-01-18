@@ -33,7 +33,6 @@ import org.slf4j.LoggerFactory;*/
 @Validated
 @Service
 public class UserServiceImpl implements UserService {
-
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -75,9 +74,8 @@ public class UserServiceImpl implements UserService {
 			String errorMerrage = messageSource.getMessage("error.Performer.is.not.valid", null, LocaleContextHolder.getLocale());
 			throw new ValidationException (errorMerrage);
 		}*/
-		
-		User ret = userRepository.saveAndFlush(user);
-		return ret;
+
+        return userRepository.saveAndFlush(user);
 	}
 
 	@Override
@@ -96,7 +94,6 @@ public class UserServiceImpl implements UserService {
 		}
 
 		if (user instanceof Receptionist receptionist && dbUser instanceof Receptionist dbReceptionist) {
-			
 			if (receptionist.getOffice() != null) {
 				dbReceptionist.setOffice(receptionist.getOffice());
 			}

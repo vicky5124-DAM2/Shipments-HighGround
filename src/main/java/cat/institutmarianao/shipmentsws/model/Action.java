@@ -19,7 +19,7 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class Action implements Serializable {
+public abstract class Action implements Serializable {
     // Values for type - Must be final
     public static final String RECEPTION = "RECEPTION";
     public static final String ASSIGNMENT = "ASSIGNMENT";

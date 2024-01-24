@@ -14,6 +14,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "actions")
 @EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("ASSIGNMENT")
 public class Assignment extends Action implements Serializable {
     public static final int MIN_PRIORITAT = 1;
     public static final int MAX_PRIORITAT = 3;

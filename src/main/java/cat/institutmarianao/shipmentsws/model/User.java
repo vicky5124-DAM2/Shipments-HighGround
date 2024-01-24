@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
-public class User implements Serializable { // TODO: abstract?
+public abstract class User implements Serializable {
     // Values for role - Must be final
     public static final String RECEPTIONIST = "RECEPTIONIST";
     public static final String LOGISTICS_MANAGER = "LOGISTICS_MANAGER";

@@ -32,10 +32,10 @@ public class Shipment implements Serializable {
     @Column(name = "category", nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sender_id")
     private Address sender;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "recipient_id")
     private Address recipient;
     @Column(name = "weight")
@@ -52,7 +52,7 @@ public class Shipment implements Serializable {
     private Boolean fragile;
     @Column(name = "note")
     private String note;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "shipment_id")
     @JsonManagedReference
     private List<Action> tracking;

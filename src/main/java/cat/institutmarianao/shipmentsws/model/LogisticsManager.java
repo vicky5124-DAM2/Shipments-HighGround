@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
-//@JsonTypeName("LOGISTICS_MANAGER")
 @DiscriminatorValue("LOGISTICS_MANAGER")
 public class LogisticsManager extends Receptionist implements Serializable {
     private static final long serialVersionUID = 1L;

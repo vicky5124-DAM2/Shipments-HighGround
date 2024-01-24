@@ -20,7 +20,7 @@ public class Assignment extends Action implements Serializable {
     public static final int MAX_PRIORITAT = 3;
     private static final long serialVersionUID = 1L;
     @JoinColumn(name = "courier_username")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Courier courier;
 
     @Column(name = "priority")

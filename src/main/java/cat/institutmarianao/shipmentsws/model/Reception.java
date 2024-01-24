@@ -1,5 +1,6 @@
 package cat.institutmarianao.shipmentsws.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "actions")
 @EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("RECEPTION")
 public class Reception extends Action implements Serializable {
     private static final long serialVersionUID = 1L;
 

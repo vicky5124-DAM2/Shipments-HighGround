@@ -14,11 +14,13 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
+//@JsonTypeName("RECEPTIONIST")
+@DiscriminatorValue("RECEPTIONIST")
 public class Receptionist extends User implements Serializable {
     public static final int MAX_PLACE = 100;
     private static final long serialVersionUID = 1L;
     @JoinColumn(name = "office_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Office office;
 
     @Column(name = "place")

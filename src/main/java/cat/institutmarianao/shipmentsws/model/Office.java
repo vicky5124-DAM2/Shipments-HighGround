@@ -1,5 +1,6 @@
 package cat.institutmarianao.shipmentsws.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,10 +13,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "offices")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Office implements Serializable {
     public static final int MAX_NAME = 100;
     private static final long serialVersionUID = 1L;
-    /* Lombok */
+
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -22,7 +22,6 @@ public class Shipment implements Serializable {
     public static final String IN_PROCESS = "IN_PROCESS";
     public static final String DELIVERED = "DELIVERED";
     private static final long serialVersionUID = 1L;
-    /* Lombok */
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,18 +49,15 @@ public class Shipment implements Serializable {
     private Boolean fragile;
     @Column(name = "note")
     private String note;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "actions", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "shipment_id"))
     private List<Action> tracking;
-    /* JPA */
-    @Enumerated(EnumType.STRING) // Stored as string
-    /* Hibernate */
+    @Enumerated(EnumType.STRING)
     @Formula("(SELECT CASE a.type WHEN '" + Action.RECEPTION + "' THEN '" + PENDING + "' " + " WHEN '"
             + Action.ASSIGNMENT + "' THEN '" + IN_PROCESS + "' " + " WHEN '" + Action.DELIVERY + "' THEN '" + DELIVERED
             + "' ELSE NULL END FROM actions a "
             + " WHERE a.date=( SELECT MAX(last_action.date) FROM actions last_action "
             + " WHERE last_action.shipment_id=a.shipment_id AND last_action.shipment_id=id ))")
-    // Lombok
     @Setter(AccessLevel.NONE)
     private Status status;
 

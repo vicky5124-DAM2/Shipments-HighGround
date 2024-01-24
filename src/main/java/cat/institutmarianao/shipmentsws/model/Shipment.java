@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.FetchProfile;
+import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;
@@ -49,8 +51,8 @@ public class Shipment implements Serializable {
     private Boolean fragile;
     @Column(name = "note")
     private String note;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "actions", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "shipment_id"))
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "shipment_id")
     private List<Action> tracking;
     @Enumerated(EnumType.STRING)
     @Formula("(SELECT CASE a.type WHEN '" + Action.RECEPTION + "' THEN '" + PENDING + "' " + " WHEN '"

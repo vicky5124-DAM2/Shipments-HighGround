@@ -1,5 +1,6 @@
 package cat.institutmarianao.shipmentsws.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -37,9 +38,10 @@ public abstract class Action implements Serializable {
     protected User performer;
     @Column(name = "date", nullable = false)
     protected Date date = new Date();
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "shipment_id")
-    //protected Shipment shipment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shipment_id")
+    @JsonBackReference
+    protected Shipment shipment;
 
     public enum Type {
         RECEPTION, ASSIGNMENT, DELIVERY

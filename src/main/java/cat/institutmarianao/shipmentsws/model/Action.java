@@ -2,6 +2,8 @@ package cat.institutmarianao.shipmentsws.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +22,14 @@ import java.util.Date;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Assignment.class, name = "ASSIGNMENT"),
+        @JsonSubTypes.Type(value = Delivery.class, name = "DELIVERY"),
+        @JsonSubTypes.Type(value = Reception.class, name = "RECEPTION"),
+})
 public abstract class Action implements Serializable {
     // Values for type - Must be final
     public static final String RECEPTION = "RECEPTION";
@@ -34,11 +44,11 @@ public abstract class Action implements Serializable {
     @Column(name = "type", nullable = false, insertable = false, updatable = false)
     protected Type type;
     @JoinColumn(name = "performer_username")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     protected User performer;
     @Column(name = "date", nullable = false)
     protected Date date = new Date();
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "shipment_id")
     @JsonBackReference
     protected Shipment shipment;

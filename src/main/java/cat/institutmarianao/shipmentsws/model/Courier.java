@@ -14,12 +14,11 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
-//@JsonTypeName("COURIER")
 @DiscriminatorValue("COURIER")
 public class Courier extends User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JoinColumn(name = "company_id")
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Company company;
 }

@@ -1,6 +1,8 @@
 package cat.institutmarianao.shipmentsws.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +20,14 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        property = "role")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Courier.class, name = "COURIER"),
+        @JsonSubTypes.Type(value = Receptionist.class, name = "RECEPTIONIST"),
+        @JsonSubTypes.Type(value = LogisticsManager.class, name = "LOGISTICS_MANAGER"),
+})
 public abstract class User implements Serializable {
     // Values for role - Must be final
     public static final String RECEPTIONIST = "RECEPTIONIST";

@@ -1,6 +1,7 @@
 package cat.institutmarianao.shipmentsws.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -53,6 +54,7 @@ public class Shipment implements Serializable {
     private String note;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "shipment_id")
+    @JsonManagedReference
     private List<Action> tracking;
     @Enumerated(EnumType.STRING)
     @Formula("(SELECT CASE a.type WHEN '" + Action.RECEPTION + "' THEN '" + PENDING + "' " + " WHEN '"

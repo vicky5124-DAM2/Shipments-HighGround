@@ -1,12 +1,12 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serializable;
 
 @Data
 @SuperBuilder
@@ -15,13 +15,11 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "actions")
 @EqualsAndHashCode(callSuper = true)
 public class Assignment extends Action implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     public static final int MIN_PRIORITAT = 1;
     public static final int MAX_PRIORITAT = 3;
-
+    private static final long serialVersionUID = 1L;
     @JoinColumn(name = "courier_username")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Courier courier;
 
     @Column(name = "priority")

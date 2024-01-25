@@ -5,43 +5,50 @@ import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
 import cat.institutmarianao.shipmentsws.services.ShipmentService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 import java.util.List;
 
+@Validated
+@Service
 public class ShipmentServiceImpl implements ShipmentService {
     @Autowired
     private ShipmentRepository shipmentRepository;
+
     @Override
+    @Transactional(readOnly = true)
     public List<Shipment> findAll(Shipment.Status status, String receivedBy, String courierAssigned, Shipment.Category category, Date from, Date to) {
+        // TODO specification
         return shipmentRepository.findAll();
     }
 
     @Override
-    public Shipment getById(Long id) {
+    @Transactional(readOnly = true)
+    public Shipment getById(@Min(value = 1) Long id) {
         return shipmentRepository.findById(id).orElseThrow(NotFoundException::new);
     }
 
     @Override
-    public List<Action> getTrackingById(Long id) {
+    @Transactional(readOnly = true)
+    public List<Action> getTrackingById(@Min(value = 1) Long id) {
         return shipmentRepository.findById(id).orElseThrow(NotFoundException::new).getTracking();
     }
 
     @Override
-    public Shipment save(Shipment shipment) {
+    public Shipment save(@NotNull @Valid Shipment shipment) {
         return shipmentRepository.saveAndFlush(shipment);
     }
 
     @Override
-    public Shipment saveAction(Action action) {
-        Shipment dbShipment = this.getById(action.getShipment().getId());
-        dbShipment.addTracking(action);
-        return shipmentRepository.saveAndFlush(dbShipment);
-    }
-
-    @Override
-    public void deleteById(Long id) {
+    public void deleteById(@NotBlank Long id) {
         shipmentRepository.deleteById(id);
     }
 }

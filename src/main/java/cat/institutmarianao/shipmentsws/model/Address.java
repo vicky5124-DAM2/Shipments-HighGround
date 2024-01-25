@@ -1,12 +1,13 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serializable;
 
 @Data
 @SuperBuilder
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "addresses")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
 

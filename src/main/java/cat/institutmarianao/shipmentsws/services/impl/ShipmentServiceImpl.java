@@ -3,7 +3,6 @@ package cat.institutmarianao.shipmentsws.services.impl;
 import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Action;
 import cat.institutmarianao.shipmentsws.model.Assignment;
-import cat.institutmarianao.shipmentsws.model.Courier;
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
 import cat.institutmarianao.shipmentsws.services.ShipmentService;

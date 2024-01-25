@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.FetchProfile;
-import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.Formula;
 
 import java.io.Serializable;

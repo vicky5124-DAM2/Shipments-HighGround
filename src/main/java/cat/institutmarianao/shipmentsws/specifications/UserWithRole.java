@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class UserWithRole implements Specification<User> {
 
     private static final long serialVersionUID = 1L;
-    private Role[] roles;
+    private final Role[] roles;
 
     public UserWithRole(Role[] roles) {
         this.roles = roles;

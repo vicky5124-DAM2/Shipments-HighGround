@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 public class UserWithFullName implements Specification<User> {
 
     private static final long serialVersionUID = 1L;
-    private String fullName;
+    private final String fullName;
 
     public UserWithFullName(String fullName) {
         this.fullName = fullName;

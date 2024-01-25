@@ -1,12 +1,12 @@
 package cat.institutmarianao.shipmentsws.model;
 
-import java.io.Serializable;
-
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -14,15 +14,14 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Table(name = "users")
 @EqualsAndHashCode(callSuper = true)
+@DiscriminatorValue("RECEPTIONIST")
 public class Receptionist extends User implements Serializable {
-	private static final long serialVersionUID = 1L;
+    public static final int MAX_PLACE = 100;
+    private static final long serialVersionUID = 1L;
+    @JoinColumn(name = "office_id")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Office office;
 
-	public static final int MAX_PLACE = 100;
-
-	@JoinColumn(name = "office_id")
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Office office;
-
-	@Column(name = "place")
-	private String place;
+    @Column(name = "place")
+    private String place;
 }

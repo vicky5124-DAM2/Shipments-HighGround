@@ -24,4 +24,9 @@ public class Company implements Serializable {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+    
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
